@@ -1,0 +1,15 @@
+services:
+  jekyll:
+    image: jekyll/jekyll:4.2.2
+    working_dir: /srv/jekyll
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      - .:/srv/jekyll
+      - ./.bundle:/usr/local/bundle
+    command: >
+      sh -lc "cd /srv/jekyll &&
+      bundle config set --local path '/usr/local/bundle' &&
+      bundle install &&
+      bundle exec jekyll serve --host 0.0.0.0 --livereload --watch --force_polling"
